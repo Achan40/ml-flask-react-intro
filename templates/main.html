@@ -7,6 +7,31 @@
     <title>ml-flask-react-intro</title>
 </head>
 <body>
-    Hello World!
+    <form action="{{ url_for('main') }}" method="POST">
+        <fieldset>
+            <legend>Input Values</legend>
+            Sepal Length:
+            <input name="Sepal.Length" type="number" required>
+            <br>
+            Sepal Width:
+            <input name="Sepal.Width" type="number" required>
+            <br>
+            Petal Length:
+            <input name="Petal.Length" type="number" required>
+            <br>
+            Petal Width:
+            <input name="Petal.Width" type="number" required>
+            <br>
+            <input type="submit">
+        </fieldset>
+    </form>
+    <div>
+        {% if result %}
+            {% for variable, value in original_input.items() %}
+            <b>{{ variable }}</b> : {{ value }}
+            {% endfor %}
+            <br> Predicted flower: {{ result }}
+        {% endif %}
+    </div>
 </body>
 </html>
