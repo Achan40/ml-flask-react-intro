@@ -1,7 +1,9 @@
 import flask
+from flask import Flask
+
 import pickle
 import pandas as pd
-from flask import Flask
+
 
 # use pickle to load in the trained model
 with open(f'model/iris_rfclass.pkl','rb') as f:
