@@ -26,7 +26,9 @@ class MyFirst(Resource):
         input_variables = pd.DataFrame([[data['SepalL'], data['SepalW'], data['PetalL'], data['PetalW']]], columns=['Sepal.Length','Sepal.Width','Petal.Length','Petal.Width'], dtype=float)
         prediction = model.predict(input_variables)[0]
 
-        return prediction
+        data['Prediction'] = prediction
+
+        return data
 
 api.add_resource(MyFirst, '/')
 
