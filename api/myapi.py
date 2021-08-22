@@ -15,7 +15,7 @@ with open(f'model/iris_rfclass.pkl','rb') as f:
 class MyFirst(Resource):
     def get(self):
         return {
-            'Status': 'SUCESS',
+            'Status': 'SUCCESS',
             'Message': 'Hello World!'
             }
     

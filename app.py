@@ -1,33 +1,22 @@
 import flask
-from flask import Flask
+from flask import Flask, send_from_directory
+from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS # comment out on deployment
+from api.myapi import MyFirst
 
 import pickle
 import pandas as pd
 
-
-# use pickle to load in the trained model
-with open(f'model/iris_rfclass.pkl','rb') as f:
-    model = pickle.load(f)
-
 # create flask object
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, static_url_path='', static_folder='frontend/front')
+CORS(app) # comment out on deployment
+api = Api(app)
 
-@app.route('/', methods=['GET','POST'])
-def main():
-    if flask.request.method == 'GET':
-        return(flask.render_template('main.html'))
+@app.route('/', defaults={'path':''})
+def serve(path):
+    return send_from_directory(app.static_folder,'index.html')
 
-    if flask.request.method == 'POST':
-        SepalL = flask.request.form['Sepal.Length']
-        SepalW = flask.request.form['Sepal.Width']
-        PetalL = flask.request.form['Petal.Length']
-        PetalW = flask.request.form['Petal.Width']
-
-        input_variables = pd.DataFrame([[SepalL, SepalW, PetalL, PetalW]], columns=['Sepal.Length','Sepal.Width','Petal.Length','Petal.Width'], dtype=float)
-
-        prediction = model.predict(input_variables)[0]
-
-        return flask.render_template('main.html', original_input={'Sepal.Length':SepalL,'Sepal.Width':SepalW,'Petal.Length':PetalL,'Petal.Width':PetalW}, result=prediction)
+api.add_resource(MyFirst, '/')
 
 if __name__ == "__main__":
     # Set debug false when in production
