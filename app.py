@@ -2,7 +2,7 @@ import flask
 from flask import Flask, send_from_directory
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS # comment out on deployment
-from api.myapi import MyFirst
+from api.myapi import MyFirst # import the MyFirst class which is the API
 
 import pickle
 import pandas as pd

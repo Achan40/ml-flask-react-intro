@@ -1,7 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from '../logo.svg';
+import '../App.css';
 import React, {useEffect, useState} from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import AppForm from './AppForm';
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
@@ -23,6 +24,7 @@ function App() {
           <h3>{getMessage.data.Message}</h3>
           :
           <h3>LOADING</h3>}
+          <AppForm/>
         </div>
       </header>
     </div>

@@ -16,7 +16,7 @@ class MyFirst(Resource):
     def get(self):
         return {
             'Status': 'SUCCESS',
-            'Message': 'Hello World!'
+            'Message': 'GET message from flask API'
             }
     
     def post(self):
