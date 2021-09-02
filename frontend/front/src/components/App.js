@@ -3,6 +3,7 @@ import '../App.css';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import AppForm from './AppForm';
+import AppExtra from './AppExtra';
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
@@ -24,6 +25,7 @@ function App() {
           <h3>{getMessage.data.Message}</h3>
           :
           <h3>LOADING</h3>}
+          <AppExtra/>
           <AppForm/>
         </div>
       </header>
