@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import AppForm from './AppForm';
 import AppExtra from './AppExtra';
+import AppClassComp from './AppClassComp';
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
@@ -26,6 +27,8 @@ function App() {
           :
           <h3>LOADING</h3>}
           <AppExtra/>
+          <br></br>
+          <AppClassComp/>
           <AppForm/>
         </div>
       </header>
