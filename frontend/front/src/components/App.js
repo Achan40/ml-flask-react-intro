@@ -30,16 +30,16 @@ class App extends Component {
         const api_response = this.state.loading ? "Loading..." : this.state.flask.Message
         return (
             <div className="App">
-            <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo"/>
-              <p>ml-flask-react-intro</p>
-                <h3>{api_response}</h3>
-                <AppExtra/>
-                <br></br>
-                <AppClassComp/>
-                <AppForm/>
-            </header>
-          </div>
+                <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo"/>
+                <p>ml-flask-react-intro</p>
+                    <h3>{api_response}</h3>
+                    <AppExtra/>
+                    <br></br>
+                    <AppClassComp/>
+                    <AppForm/>
+                </header>
+            </div>
         )
     }
 }
