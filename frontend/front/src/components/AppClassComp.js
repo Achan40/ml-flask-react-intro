@@ -14,7 +14,9 @@ class AppClassComp extends React.Component {
     handleClick() {
         this.setState(prevState => {
             // ternary operator for toggle button
-            return {answer: prevState.answer === "Yes" ? prevState.answer = "No" : prevState.answer = "Yes"}
+            return {
+                answer: prevState.answer === "Yes" ? prevState.answer = "No" : prevState.answer = "Yes"
+            }
         })
     }
 

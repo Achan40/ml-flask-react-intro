@@ -1,39 +1,47 @@
 import logo from '../logo.svg';
 import '../App.css';
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React, {Component} from "react"
 import AppForm from './AppForm';
 import AppExtra from './AppExtra';
 import AppClassComp from './AppClassComp';
 
-function App() {
-  const [getMessage, setGetMessage] = useState({})
-  useEffect(()=>{
-    axios.get('http://localhost:5000/').then(response => {
-      console.log("SUCCESS", response)
-      setGetMessage(response)
-    }).catch(error => {
-      console.log(error)
-    })
+class App extends Component {
+    constructor() {
+        super()
+        this.state = {
+            loading: false,
+            flask: {}
+        }
+    }
 
-  }, [])
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo"/>
-        <p>ml-flask-react-intro</p>
-        <div>{getMessage.status === 200 ?
-          <h3>{getMessage.data.Message}</h3>
-          :
-          <h3>LOADING</h3>}
-          <AppExtra/>
-          <br></br>
-          <AppClassComp/>
-          <AppForm/>
-        </div>
-      </header>
-    </div>
-  );
+    componentDidMount() {
+        this.setState({loading: true})
+        fetch("http://localhost:5000/")
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    loading: false,
+                    flask: data
+                })
+            })
+    }
+
+    render() {
+        const api_response = this.state.loading ? "Loading..." : this.state.flask.Message
+        return (
+            <div className="App">
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo"/>
+              <p>ml-flask-react-intro</p>
+                <h3>{api_response}</h3>
+                <AppExtra/>
+                <br></br>
+                <AppClassComp/>
+                <AppForm/>
+            </header>
+          </div>
+        )
+    }
 }
 
-export default App;
+export default App
