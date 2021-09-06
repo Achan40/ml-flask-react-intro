@@ -4,10 +4,15 @@ class AppForm extends Component {
     constructor() {
         super()
         this.state = {
-            SepalL: "",
-            SepalW: "",
-            PetalL: "",
-            PetalW: "",
+            inputs: {
+                SepalL: "",
+                SepalW: "",
+                PetalL: "",
+                PetalW: "",
+            },
+            result: {
+                prediction: "",
+            }
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -16,7 +21,10 @@ class AppForm extends Component {
     handleChange(event) {
         const {name, value} = event.target
         this.setState({
-            [name]: value
+            inputs: {
+                ...this.state.inputs,
+                [name]: value
+            }
         })
     }
 
@@ -25,24 +33,31 @@ class AppForm extends Component {
         fetch('http://localhost:5000/', {
             method: 'POST',
             headers: {'Content-type': 'application/json'},
-            body: JSON.stringify(this.state)
+            body: JSON.stringify(this.state.inputs)
         })
         .then(response => response.json())
-        .then(responseJSON => console.log(responseJSON))
+        .then(data => {
+            console.log(data)
+            this.setState({
+                result: {
+                    prediction: data.Prediction
+                }
+            })
+        })
     }
 
     render() {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="SepalL" value={this.state.SepalL} placeholder="Sepal Length" onChange={this.handleChange}/>
-                    <input type="text" name="SepalW" value={this.state.SepalW} placeholder="Sepal Width" onChange={this.handleChange}/>
-                    <input type="text" name="PetalL" value={this.state.PetalL} placeholder="Petal Length" onChange={this.handleChange}/>
-                    <input type="text" name="PetalW" value={this.state.PetalW} placeholder="Petal Width" onChange={this.handleChange}/>
+                    <input type="number" name="SepalL" required value={this.state.inputs.SepalL} placeholder="Sepal Length" onChange={this.handleChange}/>
+                    <input type="number" name="SepalW" required value={this.state.inputs.SepalW} placeholder="Sepal Width" onChange={this.handleChange}/>
+                    <input type="number" name="PetalL" required value={this.state.inputs.PetalL} placeholder="Petal Length" onChange={this.handleChange}/>
+                    <input type="number" name="PetalW" required value={this.state.inputs.PetalW} placeholder="Petal Width" onChange={this.handleChange}/>
                     <button>Generate Prediction</button>
                 </form>
-                <h3>{this.state.SepalL} {this.state.SepalW} {this.state.PetalL} {this.state.PetalW}</h3>
-                <h1>{this.Prediction}</h1>
+                <h3>{this.state.inputs.SepalL} {this.state.inputs.SepalW} {this.state.inputs.PetalL} {this.state.inputs.PetalW}</h3>
+                <h1>{this.state.result.prediction}</h1>
             </div>
         )
     }

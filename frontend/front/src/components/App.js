@@ -19,6 +19,7 @@ class App extends Component {
         fetch("http://localhost:5000/")
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 this.setState({
                     loading: false,
                     flask: data
