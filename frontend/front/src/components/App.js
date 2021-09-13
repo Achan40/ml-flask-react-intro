@@ -4,6 +4,7 @@ import React, {Component} from "react"
 import AppForm from './AppForm';
 import AppExtra from './AppExtra';
 import AppClassComp from './AppClassComp';
+import AppWebSocket from './AppWebSocket';
 
 class App extends Component {
     constructor() {
@@ -39,6 +40,7 @@ class App extends Component {
                     <br></br>
                     <AppClassComp/>
                     <AppForm/>
+                    <AppWebSocket/>
                 </header>
             </div>
         )
