@@ -1,0 +1,26 @@
+version: "1"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    image: ml-flask-react-intro-api
+    ports:
+      - "5000:5000"
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    image: ml-flask-react-intro-front
+    ports:
+      - "3000:3000"
+
+  websocket:
+    build:
+      context: .
+      dockerfile: Dockerfile.websocket
+    image: ml-flask-react-intro-websocket
+    ports:
+      - "8000:8000"
